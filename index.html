@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en" class="text-green-400">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Incognito Network</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: linear-gradient(-45deg, #000000, #001900, #002200, #000000);
+      background-size: 400% 400%;
+      animation: gradientMove 12s ease infinite;
+      font-family: monospace;
+      overflow-x: hidden;
+    }
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    #matrixCanvas, #particlesCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+    #matrixCanvas { opacity: 0.35; }
+    #particlesCanvas { opacity: 0.25; }
+
+    /* Loading Screen */
+    #loadingScreen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 9999;
+    }
+    #loadingText {
+      font-size: 2rem;
+      margin-top: 20px;
+      animation: flicker 1.3s infinite;
+    }
+    @keyframes flicker {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+  </style>
+</head>
+<body class="text-green-400">
+
+  <!-- Loading Screen -->
+  <div id="loadingScreen">
+    <img src="logo.png" class="w-40 animate-pulse" />
+    <div id="loadingText" class="text-green-400 mt-6">brewing up the chaos...</div>
+  </div>
+
+  <!-- Background Canvases -->
+  <canvas id="matrixCanvas"></canvas>
+  <canvas id="particlesCanvas"></canvas>
+
+  <header class="relative text-center py-16">
+    <img src="logo.png" class="w-48 mx-auto drop-shadow-[0_0_20px_#00ff99] animate-pulse" />
+    <h1 class="mt-6 text-5xl font-bold drop-shadow-[0_0_15px_#00ff99] tracking-widest animate-[glow_2s_ease-in-out_infinite]">INCOGNITO NETWORK</h1>
+    <p class="mt-2 opacity-80">The home of GlitchSMP and LifestealSMP</p>
+
+    <a href="https://discord.gg/RnR5dBgnvx" target="_blank" class="inline-block mt-6 px-6 py-3 bg-green-500 text-black font-bold rounded-xl shadow-lg hover:bg-green-400 transition">Join our Discord</a>
+  </header>
+
+  <section class="relative max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 px-6 py-10">
+    <div class="p-6 bg-black/60 border border-green-500 rounded-2xl shadow-[0_0_25px_#00ff99] backdrop-blur-sm hover:scale-105 transition-transform">
+      <h2 class="text-3xl font-bold mb-3">Glitch SMP</h2>
+      <p class="opacity-80">A chaotic SMP where reality shatters, glitches spawn, and players adapt to unpredictable worlds.</p>
+    </div>
+
+    <div class="p-6 bg-black/60 border border-green-500 rounded-2xl shadow-[0_0_25px_#00ff99] backdrop-blur-sm hover:scale-105 transition-transform">
+      <h2 class="text-3xl font-bold mb-3">Lifesteal SMP</h2>
+      <p class="opacity-80">Steal hearts, conquer opponents, and thrive in a competitive lifesteal experience.</p>
+    </div>
+  </section>
+
+  <section class="relative max-w-4xl mx-auto px-6 py-12">
+    <h2 class="text-4xl font-bold text-center mb-8 drop-shadow-[0_0_10px_#00ff99] animate-pulse">Rules</h2>
+    <div class="bg-black/60 border border-green-500 rounded-2xl shadow-[0_0_25px_#00ff99] p-8 space-y-6 backdrop-blur-sm">
+      <p class="opacity-80">These rules are in place to maintain order and make sure everyone feels safe, respected and is having fun!</p>
+
+      <h3 class="text-2xl font-bold mt-6">Minecraft Specific Rules</h3>
+      <ul class="list-disc list-inside space-y-1 opacity-90">
+        <li>No lag machines</li>
+        <li>No bugs or exploits</li>
+        <li>No hacking/cheating</li>
+        <li>No spawn killing players</li>
+        <li>No xraying</li>
+        <li>No using replay mods for anything besides recording yourself</li>
+        <li>No Naked Killing players (no armor/weapons, not fighting back)</li>
+      </ul>
+
+      <h3 class="text-2xl font-bold mt-6">Server-Wide Rules (Discord & Minecraft)</h3>
+      <ul class="list-disc list-inside space-y-1 opacity-90">
+        <li>No excessive swearing</li>
+        <li>No discrimination of any kind</li>
+        <li>No spamming</li>
+        <li>No threats</li>
+        <li>Keep it PG-13</li>
+      </ul>
+
+      <p class="opacity-80 mt-4">The Owner or Manager has the final say in all punishments. Not all rules are listed here, nor do staff need a specific rule violation to issue punishment. Moderator/Admin punishments can be appealed via ticket.</p>
+
+      <p class="opacity-80 mt-4">By following these rules, everyone can have a fun, respectful and safe experience!</p>
+    </div>
+  </section>
+
+  <footer class="relative text-center py-10 opacity-70">
+    © 2025 Incognito Network — All Rights Reserved
+  </footer>
+
+  <!-- Matrix Rain Script -->
+  <script>
+    const matrix = document.getElementById('matrixCanvas');
+    const mtx = matrix.getContext('2d');
+    matrix.width = window.innerWidth;
+    matrix.height = window.innerHeight;
+
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890@#$%&*abcdefghijklmnopqrstuvwxyz';
+    const fontSize = 16;
+    const columns = matrix.width / fontSize;
+    const drops = Array(Math.floor(columns)).fill(1);
+
+    function drawMatrix() {
+      mtx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+      mtx.fillRect(0, 0, matrix.width, matrix.height);
+      mtx.fillStyle = '#00ff99';
+      mtx.font = fontSize + 'px monospace';
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = chars[Math.floor(Math.random() * chars.length)];
+        mtx.fillText(text, i * fontSize, drops[i] * fontSize);
+        if (drops[i] * fontSize > matrix.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      }
+    }
+    setInterval(drawMatrix, 40);
+  </script>
+
+  <!-- Hacker Particle Script -->
+  <script>
+    const particlesCanvas = document.getElementById('particlesCanvas');
+    const ptx = particlesCanvas.getContext('2d');
+    particlesCanvas.width = window.innerWidth;
+    particlesCanvas.height = window.innerHeight;
+
+    const particles = [];
+
+    for (let i = 0; i < 150; i++) {
+      particles.push({
+        x: Math.random() * particlesCanvas.width,
+        y: Math.random() * particlesCanvas.height,
+        size: Math.random() * 3 + 1,
+        speedX: (Math.random() - 0.5) * 0.5,
+        speedY: (Math.random() - 0.5) * 0.5
+      });
+    }
+
+    function drawParticles() {
+      ptx.clearRect(0, 0, particlesCanvas.width, particlesCanvas.height);
+      ptx.fillStyle = '#00ff99';
+
+      particles.forEach(p => {
+        ptx.beginPath();
+        ptx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ptx.fill();
+        p.x += p.speedX;
+        p.y += p.speedY;
+        if (p.x < 0 || p.x > particlesCanvas.width) p.speedX *= -1;
+        if (p.y < 0 || p.y > particlesCanvas.height) p.speedY *= -1;
+      });
+
+      requestAnimationFrame(drawParticles);
+    }
+    drawParticles();
+  </script>
+
+  <!-- Loading Screen Script -->
+  <script>
+    const loadingText = document.getElementById('loadingText');
+    const loadingScreen = document.getElementById('loadingScreen');
+    const messages = ["brewing up the chaos...", "the adventure awaits..."];
+    let index = 0;
+
+    // Alternate messages
+    setInterval(() => {
+      index = (index + 1) % messages.length;
+      loadingText.textContent = messages[index];
+    }, 1500);
+
+    // Hide loading screen safely
+    function hideLoader() {
+      loadingScreen.style.transition = 'opacity 0.6s ease';
+      loadingScreen.style.opacity = '0';
+      setTimeout(() => {
+        loadingScreen.style.display = 'none';
+      }, 600);
+    }
+
+    // Try both DOMContentLoaded and load
+    document.addEventListener('DOMContentLoaded', hideLoader);
+    window.addEventListener('load', hideLoader);
+
+    // Hard fallback in case neither event fires
+    setTimeout(hideLoader, 3000);
+  </script>
+</body>
+</html>
