@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Infuse Crafting Recipes</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: radial-gradient(circle at bottom, rgba(40,120,160,0.15), transparent 60%), #0e0e11;
+      color: #eaeaf0;
+      margin: 0;
+      overflow-x: hidden;
+    }
+
+    /* Actual page padding container */
+    .page {
+      padding: 48px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        radial-gradient(circle, rgba(160,220,255,0.08) 2px, transparent 3px),
+        radial-gradient(circle, rgba(160,220,255,0.05) 1px, transparent 2px);
+      background-size: 120px 120px, 60px 60px;
+      animation: bubbles 60s linear infinite;
+    }
+
+    body::after {
+      animation-duration: 90s;
+      opacity: 0.6;
+    }
+
+    @keyframes bubbles {
+      from { background-position: 0 0, 0 0; }
+      to { background-position: 0 -1200px, 0 -600px; }
+    }
+
+    h1, h2 {
+      margin-top: 0;
+    }
+    .explanation {
+      max-width: 900px;
+      line-height: 1.5;
+      margin-bottom: 32px;
+    }
+    .recipes {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+    }
+    .recipe {
+      background: #181820;
+      border-radius: 10px;
+      padding: 12px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    }
+    .recipe img {
+      width: 200px;
+      height: 106px;
+      object-fit: contain;
+      image-rendering: pixelated;
+      margin-bottom: 8px;
+    }
+    .recipe-name {
+      font-weight: bold;
+      margin-top: 6px;
+    }
+    ul {
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page">
+
+  <h1>Infuse Crafting Recipes</h1>
+
+  <div class="explanation">
+    <p>
+      There are two types of Infuses, <strong>Normal</strong> and <strong>Augumented</strong>. 
+      Augumented infuses can be crafted once and normal infuses twice. Augumented effects are more powerful versions of the normal ones that can be obtained by being the first person to craft them and waiting for a 15 minute ritual. After someone obtains a Augumented infuse, that infuse will switch to normal infuses from then on, even if that infuse is destroyed.
+    </p>
+
+    <h2>How to craft Infuses</h2>
+    <ul>
+      <li>Place a brewing stand, this is important as infuses can only be crafted inside it</li>
+      <li>Open the brewing stand and select the crafting table</li>
+      <li>Pull up the recipe for the Infuse you want to craft (They are in this channel)</li>
+      <li>Arrange the materials exactly in the crafting grid</li>
+      <li>If an item doesn't show up, the recipe is wrong or the infuse has already been crafted the max amount of times</li>
+      <li>If you are crafting an augumented effect, a 15 minute ritual will start. DO NOT LEAVE THE SERVER OR AREA DURING THIS RITUAL! You will lose your infuse and it will cause server bugs.</li>
+    </ul>
+  </div>
+
+  <div class="recipes">
+    <div class="recipe"><img src="./recipes/frost.png" alt="Frost Infuse"><div class="recipe-name">Frost</div></div>
+    <div class="recipe"><img src="./recipes/speed.png" alt="Speed Infuse"><div class="recipe-name">Speed</div></div>
+    <div class="recipe"><img src="./recipes/ocean.png" alt="Ocean Infuse"><div class="recipe-name">Ocean</div></div>
+    <div class="recipe"><img src="./recipes/invisibility.png" alt="Invisibility Infuse"><div class="recipe-name">Invisibility</div></div>
+    <div class="recipe"><img src="./recipes/feather.png" alt="Feather Infuse"><div class="recipe-name">Feather</div></div>
+    <div class="recipe"><img src="./recipes/ender.png" alt="Ender Infuse"><div class="recipe-name">Ender</div></div>
+    <div class="recipe"><img src="./recipes/emerald.png" alt="Emerald Infuse"><div class="recipe-name">Emerald</div></div>
+    <div class="recipe"><img src="./recipes/heart.png" alt="Heart Infuse"><div class="recipe-name">Heart</div></div>
+    <div class="recipe"><img src="./recipes/regeneration.png" alt="Regeneration Infuse"><div class="recipe-name">Regeneration</div></div>
+    <div class="recipe"><img src="./recipes/strength.png" alt="Strength Infuse"><div class="recipe-name">Strength</div></div>
+    <div class="recipe"><img src="./recipes/fire.png" alt="Fire Infuse"><div class="recipe-name">Fire</div></div>
+    <div class="recipe"><img src="./recipes/haste.png" alt="Haste Infuse"><div class="recipe-name">Haste</div></div>
+    <div class="recipe"><img src="./recipes/thief.png" alt="Thief Infuse"><div class="recipe-name">Thief</div></div>
+    <div class="recipe"><img src="./recipes/thunder.png" alt="Thunder Infuse"><div class="recipe-name">Thunder</div></div>
+    <div class="recipe"><img src="./recipes/apophis.png" alt="Apophis Infuse"><div class="recipe-name">Apophis</div></div>
+  </div>
+
+  </div>
+
+</body>
+</html>
