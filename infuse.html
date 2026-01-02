@@ -12,13 +12,6 @@
       overflow-x: hidden;
     }
 
-    /* Actual page padding container */
-    .page {
-      padding: 48px;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-
     body::before,
     body::after {
       content: "";
@@ -45,17 +38,79 @@
     h1, h2 {
       margin-top: 0;
     }
+
+    .page {
+      padding: 48px;
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      gap: 32px; /* space between widget and main content */
+      flex-wrap: wrap;
+    }
+
+    /* Widget styles */
+    .widget {
+      width: 320px;
+      border: 2px solid #4CAF50;
+      border-radius: 8px;
+      padding: 16px;
+      font-family: sans-serif;
+      text-align: center;
+      background: #f9f9f9;
+      flex-shrink: 0;
+    }
+    .widget img {
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
+      margin: 12px 0;
+    }
+    .widget a {
+      display: inline-block;
+      padding: 8px 12px;
+      font-size: 14px;
+      color: #fff;
+      border-radius: 5px;
+      text-decoration: none;
+      margin-bottom: 8px;
+      transition: 0.2s;
+    }
+    .widget .free-download {
+      padding: 10px 20px;
+      font-size: 16px;
+      background: #4CAF50;
+    }
+    .widget .paid-download {
+      background: #FF9800;
+    }
+    .widget .alt-download {
+      background: #2196F3;
+    }
+    .widget p {
+      font-size: 12px;
+      color: #666;
+      margin-top: 12px;
+    }
+
+    /* Main content */
+    .content {
+      flex: 1;
+      min-width: 600px;
+    }
+
     .explanation {
       max-width: 900px;
       line-height: 1.5;
       margin-bottom: 32px;
     }
+
     .recipes {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
       gap: 20px;
       max-width: 1200px;
     }
+
     .recipe {
       background: #181820;
       border-radius: 10px;
@@ -63,6 +118,7 @@
       text-align: center;
       box-shadow: 0 4px 10px rgba(0,0,0,0.4);
     }
+
     .recipe img {
       width: 200px;
       height: 106px;
@@ -70,10 +126,12 @@
       image-rendering: pixelated;
       margin-bottom: 8px;
     }
+
     .recipe-name {
       font-weight: bold;
       margin-top: 6px;
     }
+
     ul {
       margin-top: 8px;
     }
@@ -83,43 +141,78 @@
 
   <div class="page">
 
-  <h1>Infuse Tutorial</h1>
+    <!-- Left side widget -->
+    <div class="widget">
+      <p style="font-size:14px; margin:12px 0 4px 0; font-weight:bold;">Want to create your own Infuse SMP like ours?</p><br>
+      <h2 style="margin:0 0 8px 0; color:#4CAF50;">Infuse SMP Plugins</h2>
+      <img src="https://i.ibb.co/nsS0YBWG/image-8.png" alt="Infuse SMP Plugin"><br>
 
-  <div class="explanation">
-    <p>
-      There are two types of Infuses, <strong>Normal</strong> and <strong>Augumented</strong>. 
-      Augumented infuses can be crafted once and normal infuses twice. Augumented effects are more powerful versions of the normal ones that can be obtained by being the first person to craft them and waiting for a 15 minute ritual. After someone obtains a Augumented infuse, that infuse will switch to normal infuses from then on, even if that infuse is destroyed.
-    </p>
+      <a href="https://incognitomc.net/files/infuse.jar" download class="free-download">
+        Free Plugin Download
+      </a>
 
-    <h2>How to craft Infuses</h2>
-    <ul>
-      <li>Place a brewing stand, this is important as infuses can only be crafted inside it</li>
-      <li>Open the brewing stand and select the crafting table</li>
-      <li>Pull up the recipe for the Infuse you want to craft (They are in this channel)</li>
-      <li>Arrange the materials exactly in the crafting grid</li>
-      <li>If an item doesn't show up, the recipe is wrong or the infuse has already been crafted the max amount of times</li>
-      <li>If you are crafting an augumented effect, a 15 minute ritual will start. DO NOT LEAVE THE SERVER OR AREA DURING THE CRAFTING RITUAL! You will lose your infuse and it will cause server issues.</li>
-    </ul>
-  </div>
-  
+      <p style="font-size:14px; margin:12px 0 4px 0; font-weight:bold;">
+        The Free and Paid (non-alternative) are the same. We use that plugin for our Infuse SMP on Incognito Network
+      </p><br>
 
-  <div class="recipes">
-    <div class="recipe"><img src="./recipes/frost.png" alt="Frost Infuse"><div class="recipe-name">Frost</div></div>
-    <div class="recipe"><img src="./recipes/speed.png" alt="Speed Infuse"><div class="recipe-name">Speed</div></div>
-    <div class="recipe"><img src="./recipes/ocean.png" alt="Ocean Infuse"><div class="recipe-name">Ocean</div></div>
-    <div class="recipe"><img src="./recipes/invisibility.png" alt="Invisibility Infuse"><div class="recipe-name">Invisibility</div></div>
-    <div class="recipe"><img src="./recipes/feather.png" alt="Feather Infuse"><div class="recipe-name">Feather</div></div>
-    <div class="recipe"><img src="./recipes/ender.png" alt="Ender Infuse"><div class="recipe-name">Ender</div></div>
-    <div class="recipe"><img src="./recipes/emerald.png" alt="Emerald Infuse"><div class="recipe-name">Emerald</div></div>
-    <div class="recipe"><img src="./recipes/heart.png" alt="Heart Infuse"><div class="recipe-name">Heart</div></div>
-    <div class="recipe"><img src="./recipes/regeneration.png" alt="Regeneration Infuse"><div class="recipe-name">Regeneration</div></div>
-    <div class="recipe"><img src="./recipes/strength.png" alt="Strength Infuse"><div class="recipe-name">Strength</div></div>
-    <div class="recipe"><img src="./recipes/fire.png" alt="Fire Infuse"><div class="recipe-name">Fire</div></div>
-    <div class="recipe"><img src="./recipes/haste.png" alt="Haste Infuse"><div class="recipe-name">Haste</div></div>
-    <div class="recipe"><img src="./recipes/thief.png" alt="Thief Infuse"><div class="recipe-name">Thief</div></div>
-    <div class="recipe"><img src="./recipes/thunder.png" alt="Thunder Infuse"><div class="recipe-name">Thunder</div></div>
-    <div class="recipe"><img src="./recipes/apophis.png" alt="Apophis Infuse"><div class="recipe-name">Apophis</div></div>
-  </div>
+      <div style="display:flex; flex-direction:column; gap:8px; margin-top:4px;">
+        <a href="https://builtbybit.com/resources/infuse-revamped-by-catadmirer.68074/" target="_blank" class="paid-download">
+          Paid Plugin Download
+        </a>
+        <a href="https://builtbybit.com/resources/infuse-smp-augmented-effects.63004/" target="_blank" class="alt-download">
+          Alternative Plugin (Paid)
+        </a><br>
+        <font size=2><p>These resource packs will not work on Incognito Network.</p></font>
+        <a href="https://incognitomc.net/files/CatAdmirerPack.zip" target="_blank" class="paid-download">
+          Resource Pack
+        </a>
+        <a href="https://modrinth.com/resourcepack/infuse-smp-s2-texture-pack" target="_blank" class="alt-download">
+          Alternative Resource Pack
+        </a>
+      </div>
+
+      <p>Incognito Network does not recieve profits from purchases of these plugins</p>
+    </div>
+
+    <!-- Right side main content -->
+    <div class="content">
+      <h1>Infuse Tutorial</h1>
+
+      <div class="explanation">
+        <p>
+          There are two types of Infuses, <strong>Normal</strong> and <strong>Augumented</strong>. 
+          Augumented infuses can be crafted once and normal infuses twice. Augumented effects are more powerful versions of the normal ones that can be obtained by being the first person to craft them and waiting for a 15 minute ritual. After someone obtains a Augumented infuse, that infuse will switch to normal infuses from then on, even if that infuse is destroyed.
+        </p>
+
+        <h2>How to craft Infuses</h2>
+        <ul>
+          <li>Place a brewing stand, this is important as infuses can only be crafted inside it</li>
+          <li>Open the brewing stand and select the crafting table</li>
+          <li>Pull up the recipe for the Infuse you want to craft (They are in this channel)</li>
+          <li>Arrange the materials exactly in the crafting grid</li>
+          <li>If an item doesn't show up, the recipe is wrong or the infuse has already been crafted the max amount of times</li>
+          <li>If you are crafting an augumented effect, a 15 minute ritual will start. DO NOT LEAVE THE SERVER OR AREA DURING THE CRAFTING RITUAL! You will lose your infuse and it will cause server issues.</li>
+        </ul>
+      </div>
+
+      <div class="recipes">
+        <div class="recipe"><img src="./recipes/frost.png" alt="Frost Infuse"><div class="recipe-name">Frost</div></div>
+        <div class="recipe"><img src="./recipes/speed.png" alt="Speed Infuse"><div class="recipe-name">Speed</div></div>
+        <div class="recipe"><img src="./recipes/ocean.png" alt="Ocean Infuse"><div class="recipe-name">Ocean</div></div>
+        <div class="recipe"><img src="./recipes/invisibility.png" alt="Invisibility Infuse"><div class="recipe-name">Invisibility</div></div>
+        <div class="recipe"><img src="./recipes/feather.png" alt="Feather Infuse"><div class="recipe-name">Feather</div></div>
+        <div class="recipe"><img src="./recipes/ender.png" alt="Ender Infuse"><div class="recipe-name">Ender</div></div>
+        <div class="recipe"><img src="./recipes/emerald.png" alt="Emerald Infuse"><div class="recipe-name">Emerald</div></div>
+        <div class="recipe"><img src="./recipes/heart.png" alt="Heart Infuse"><div class="recipe-name">Heart</div></div>
+        <div class="recipe"><img src="./recipes/regeneration.png" alt="Regeneration Infuse"><div class="recipe-name">Regeneration</div></div>
+        <div class="recipe"><img src="./recipes/strength.png" alt="Strength Infuse"><div class="recipe-name">Strength</div></div>
+        <div class="recipe"><img src="./recipes/fire.png" alt="Fire Infuse"><div class="recipe-name">Fire</div></div>
+        <div class="recipe"><img src="./recipes/haste.png" alt="Haste Infuse"><div class="recipe-name">Haste</div></div>
+        <div class="recipe"><img src="./recipes/thief.png" alt="Thief Infuse"><div class="recipe-name">Thief</div></div>
+        <div class="recipe"><img src="./recipes/thunder.png" alt="Thunder Infuse"><div class="recipe-name">Thunder</div></div>
+        <div class="recipe"><img src="./recipes/apophis.png" alt="Apophis Infuse"><div class="recipe-name">Apophis</div></div>
+      </div>
+    </div>
 
   </div>
 
