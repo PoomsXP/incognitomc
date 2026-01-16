@@ -79,32 +79,71 @@
   <header class="relative text-center py-16">
     <img src="/assets/images/logo.png" class="w-48 mx-auto drop-shadow-[0_0_20px_#00ff99] animate-pulse" />
     <h1 class="mt-6 text-5xl font-bold drop-shadow-[0_0_15px_#00ff99] tracking-widest animate-[glow_2s_ease-in-out_infinite]">INCOGNITO NETWORK</h1>
-    <p class="mt-2 opacity-80">A old project.</p>
+    <p class="mt-2 opacity-80">An old project.</p>
     <p class="mt-2 opacity-80">Incognito Network is done, read the popup for more information</p>
-    <!-- Centered Dismissible Popout Notification -->
-<div id="incognito-overlay" style="
+    <!-- Hybrid Dismissible Notification -->
+<div id="incognito-notice" style="
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    padding: 20px 25px;
+    border-radius: 10px;
+    max-width: 400px;
+    text-align: center;
+    font-family: sans-serif;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
     z-index: 9999;
+    transition: all 0.5s ease;
 ">
-    <div id="incognito-notice" style="
-        background-color: #f8d7da;
-        color: #721c24;
-        border: 1px solid #f5c6cb;
-        padding: 20px 25px;
-        border-radius: 10px;
-        max-width: 400px;
-        text-align: center;
-        font-family: sans-serif;
-        box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+    <strong style="font-size: 1.2em;">Incognito Network Is Done</strong>
+    <p style="margin: 12px 0 0; font-size: 0.95em;">
+        Zedias, a former manager, raided our Discord server. The owner has decided to give up on the project.
+    </p>
+    <button id="dismiss-btn" style="
+        margin-top: 15px;
+        background: #721c24;
+        color: #fff;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 0.9em;
     ">
+        Dismiss
+    </button>
+</div>
+
+<script>
+  // Block scrolling initially
+  document.body.style.overflow = 'hidden';
+
+  const notice = document.getElementById('incognito-notice');
+  const btn = document.getElementById('dismiss-btn');
+
+  btn.addEventListener('click', () => {
+    // Re-enable scrolling
+    document.body.style.overflow = '';
+
+    // Move popup to bottom-right and shrink it
+    notice.style.top = '';
+    notice.style.left = '';
+    notice.style.bottom = '20px';
+    notice.style.right = '20px';
+    notice.style.transform = 'none';
+    notice.style.maxWidth = '250px';
+    notice.style.padding = '10px 15px';
+    notice.style.textAlign = 'left';
+    notice.style.fontSize = '0.85em';
+
+    // Optionally hide the dismiss button after moving
+    btn.style.display = 'none';
+  });
+</script>
+
         <strong style="font-size: 1.2em;">Incognito Network Is Done</strong>
         <p style="margin: 12px 0 0; font-size: 0.95em;">
             Zedias, a former manager, raided our Discord server. The owner has decided to give up on the project.
